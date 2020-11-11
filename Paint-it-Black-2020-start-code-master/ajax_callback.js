@@ -13,17 +13,17 @@ function makeAjaxCall(url, methodType){
               if (xmlhttp.status === 200){
                  //console.log("xmlhttp done successfully"); // debug
                  let serverResponse = xmlhttp.responseText; //server antwoord met string
-                 console.log(serverResponse); // debug
+                 //console.log(serverResponse); // debug
                  resolve(serverResponse); // wordt via return promiseObj teruggegeven
               } else {
               	reject(xmlhttp.status);
-                 //console.log("xmlhttp failed"); // debug
+                 console.log("xmlhttp failed"); // debug
               }
            } else {
                //console.log("xmlhttp processing going on"); // debug
            }
         }
-        // console.log("request sent succesfully"); // debug
+        console.log("request sent succesfully"); // debug
       });
    return promiseObj;
   }
@@ -34,16 +34,19 @@ function errorHandler(statusCode){
 
 function serverWriteJson(data){
 let drawingJsonString = JSON.stringify(data);
-let url = controlScript + "?puts=" + drawingJsonString;
+let url = controlScript + "?put=" + drawingJsonString;
     // hier komt jouw code
     makeAjaxCall(url, "GET");
   }
 
 function serverGetJson(){
-makeAjaxCall(jsonFile,"POST"). then (readJson);
+let url = "http://29453.hosts2.ma-cloud.nl/Paint-it-Black-2020-start-code-master/drawing.json";
+makeAjaxCall(url, "GET"). then (readJson, errorHandler);
+//makeAjaxCall(jsonFile,"POST"). then (readJson);
 }
 
 function preload() {
-
+let url = "http://29453.hosts2.ma-cloud.nl/Paint-it-Black-2020-start-code-master/preload.json";
+makeAjaxCall(url, "GET"). then (readJson2, errorHandler);
   // hier komt jouw code
 }

@@ -26,7 +26,7 @@ class Bit {
           colorSelection = this.color;
         } else {
           this.color = colorSelection;
-          //this.drawLarge(context);
+          this.drawLarge(context);
           this.draw(context);
           serverWriteJson(drawing);
         //  serverWriteJson(drawing);
@@ -34,17 +34,17 @@ class Bit {
       }
     })
   }
-  /*
+  
     drawLarge(context) {
     let margin = 5;
     context.beginPath();
-    context.fillStyle = ega[this.color];
-    context.rect(this.x - margin, this.y - margin, boxWidth + margin, boxHeight + margin);
-    //context.stroke();
+    context.fillStyle - ega[this.color];
+    context.rect(this.x - 5, this.y - 5, boxWidth + 2 * margin, boxHeight + 2 * margin);
+    context.stroke();
     context.fill();
     context.closePath();
   }
-  */
+  
 
   draw(context) {
     context.beginPath();
@@ -92,6 +92,16 @@ function readJson(jsonString) {
     drawing[i].draw(context);
     }
   }
+
+function readJson2(jsonString){
+    jsonObj = JSON.parse(jsonString);
+    for(i=0; i<80; i++){
+        drawing[i].x = jsonObj[i].x;
+        drawing[i].x = jsonObj[i].y;
+        drawing[i].color = jsonObj[i].color;
+        drawing[i].draw(context);
+    }
+}
 
 init();
 
